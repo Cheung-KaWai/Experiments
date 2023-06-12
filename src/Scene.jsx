@@ -4,6 +4,7 @@ import React from "react";
 import styled from "styled-components";
 import { Building } from "./Building";
 import { CurtainRoom } from "./CurtainRoom";
+import { Curtain } from "./Curtain";
 
 export const Scene = () => {
   return (
@@ -14,6 +15,7 @@ export const Scene = () => {
         <ambientLight intensity={0.3} />
         <Center>
           <CurtainRoom />
+          <Curtain />
         </Center>
       </Canvas>
     </SceneContainer>

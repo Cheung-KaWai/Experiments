@@ -55,16 +55,16 @@ export function CurtainRoom(props) {
   const roomMat = new MeshStandardMaterial({
     lightMap: roombake,
     envMapIntensity: 0,
-    lightMapIntensity: 1.2,
+    lightMapIntensity: 1.7,
     aoMap: aoWalls,
-    aoMapIntensity: 0.5,
+    aoMapIntensity: 0.7,
   });
   const ceilingMat = new MeshStandardMaterial({
     lightMap: ceilingbake,
     envMapIntensity: 0,
-    lightMapIntensity: 1,
+    lightMapIntensity: 1.5,
     aoMap: aoCeiling,
-    aoMapIntensity: 0.5,
+    aoMapIntensity: 0.7,
   });
 
   return (
