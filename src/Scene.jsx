@@ -3,14 +3,15 @@ import { Canvas } from "@react-three/fiber";
 import React from "react";
 import styled from "styled-components";
 import { Building } from "./Building";
+import { TriangleAnimation } from "./Experiment2/TriangleAnimation";
 
 export const Scene = () => {
   return (
     <SceneContainer>
-      <Canvas camera={{ position: [0, 15, 40] }}>
-        <OrbitControls autoRotate />
+      <Canvas camera={{ position: [0, 5, 5] }}>
+        <OrbitControls />
         <Environment preset="city" />
-        <Building />
+        <TriangleAnimation />
       </Canvas>
     </SceneContainer>
   );
