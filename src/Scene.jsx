@@ -10,7 +10,8 @@ export const Scene = () => {
     <SceneContainer>
       <Canvas camera={{ position: [0, 4, 4] }}>
         <OrbitControls />
-        <Environment preset="city" />
+        {/* <Environment preset="city" /> */}
+        <ambientLight intensity={0.3} />
         <Center>
           <CurtainRoom />
         </Center>

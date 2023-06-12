@@ -5,7 +5,7 @@ Command: npx gltfjsx@6.2.3 .\curtainRoom.glb -T -p 6
 
 import React, { useLayoutEffect, useRef } from "react";
 import { useGLTF, useTexture } from "@react-three/drei";
-import { MeshStandardMaterial } from "three";
+import { MeshStandardMaterial, SRGBColorSpace } from "three";
 
 export function CurtainRoom(props) {
   const { nodes, materials } = useGLTF("Experiment3/curtainRoom.glb");
@@ -17,10 +17,27 @@ export function CurtainRoom(props) {
     "/Experiment3/bakes/Floor_Bake1_CyclesBake_DIFFUSE.jpg",
     "/Experiment3/bakes/Room_Bake1_CyclesBake_DIFFUSE.jpg",
     "/Experiment3/bakes/Ceiling_Bake1_CyclesBake_DIFFUSE.jpg",
+    "/Experiment3/bakes/Room_Bake1_PBR_Ambient Occlusion.jpg",
+    "/Experiment3/bakes/Ceiling_Bake1_PBR_Ambient Occlusion.jpg",
+    "/Experiment3/bakes/Floor_Bake1_PBR_Ambient Occlusion.jpg",
   ]);
+
+  const floorProps = useTexture({
+    map: "/Experiment3/color.jpg",
+    roughnessMap: "/Experiment3/roughness.jpg",
+    normalMap: "/Experiment3/normal.jpg",
+  });
+
+  floorProps.map.colorSpace = SRGBColorSpace;
+
+  // const bakes = useTexture([
+  //   "/Experiment3/bakes/Floor_Bake1_CyclesBake_DIFFUSE.jpg",
+  //   "/Experiment3/bakes/Room_Bake1_CyclesBake_DIFFUSE.jpg",
+  //   "/Experiment3/bakes/Ceiling_Bake1_CyclesBake_DIFFUSE.jpg",
+  // ]);
   bakes.map((bake) => (bake.flipY = false));
 
-  const [floorbake, roombake, ceilingbake] = bakes;
+  const [floorbake, roombake, ceilingbake, aoWalls, aoCeiling, aoFloor] = bakes;
   console.log(bakes);
 
   useLayoutEffect(() => {
@@ -32,22 +49,44 @@ export function CurtainRoom(props) {
   const floorMat = new MeshStandardMaterial({
     lightMap: floorbake,
     envMapIntensity: 0,
-    lightMapIntensity: 0.5,
+    lightMapIntensity: 2,
+    ...floorProps,
   });
   const roomMat = new MeshStandardMaterial({
     lightMap: roombake,
-    envMapIntensity: 0.5,
+    envMapIntensity: 0,
+    lightMapIntensity: 1.2,
+    aoMap: aoWalls,
+    aoMapIntensity: 0.5,
   });
   const ceilingMat = new MeshStandardMaterial({
     lightMap: ceilingbake,
-    envMapIntensity: 0.5,
+    envMapIntensity: 0,
+    lightMapIntensity: 1,
+    aoMap: aoCeiling,
+    aoMapIntensity: 0.5,
   });
 
   return (
-    <group {...props} dispose={null}>
-      <mesh geometry={nodes.Room.geometry} material={roomMat} ref={room} />
-      <mesh geometry={nodes.Floor.geometry} material={floorMat} ref={floor} />
-      <mesh geometry={nodes.Ceiling.geometry} material={ceilingMat} ref={ceiling} />
+    <group
+      {...props}
+      dispose={null}
+    >
+      <mesh
+        geometry={nodes.Room.geometry}
+        material={roomMat}
+        ref={room}
+      />
+      <mesh
+        geometry={nodes.Floor.geometry}
+        material={floorMat}
+        ref={floor}
+      />
+      <mesh
+        geometry={nodes.Ceiling.geometry}
+        material={ceilingMat}
+        ref={ceiling}
+      />
     </group>
   );
 }
