@@ -1,16 +1,19 @@
-import { Box, Environment, OrbitControls } from "@react-three/drei";
+import { Box, Center, Environment, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import React from "react";
 import styled from "styled-components";
 import { Building } from "./Building";
+import { CurtainRoom } from "./CurtainRoom";
 
 export const Scene = () => {
   return (
     <SceneContainer>
-      <Canvas camera={{ position: [0, 15, 40] }}>
-        <OrbitControls autoRotate />
+      <Canvas camera={{ position: [0, 4, 4] }}>
+        <OrbitControls />
         <Environment preset="city" />
-        <Building />
+        <Center>
+          <CurtainRoom />
+        </Center>
       </Canvas>
     </SceneContainer>
   );

@@ -80,7 +80,7 @@ export function Building(props) {
   return (
     <group {...props} dispose={null} position={[0, 8.125126, 0]} rotation={[Math.PI / 2, 0, -Math.PI / 2]}>
       <mesh geometry={nodes.Modern_Apartments_Mid_Roof001.geometry}>
-        <meshStandardMaterial color={"#339da5"} transparent={true} />
+        <meshStandardMaterial color={"#339da5"} />
       </mesh>
       <lineSegments geometry={gLines1} material={lineMaterial} />
     </group>
