@@ -1,16 +1,26 @@
 import { gsap } from "gsap";
 import React from "react";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 export const DetailPage = () => {
-  const tl = gsap.timeline();
+  const tl = gsap.timeline({ onReverseComplete: goBack });
+  const navigate = useNavigate();
 
   useEffect(() => {
     tl.to("#cardCover", { yPercent: 100, duration: 0.7 }, 0);
     tl.to("#imageText", { yPercent: -100, duration: 1 }, 0);
     tl.to(".staggerItem", { yPercent: -200, duration: 1, stagger: 0.1 }, 0);
   }, []);
+
+  const reverseAnimation = () => {
+    tl.reverse();
+  };
+
+  function goBack() {
+    navigate("/");
+  }
 
   return (
     <Container>
@@ -38,6 +48,7 @@ export const DetailPage = () => {
           <StaggerChild className="staggerItem">:))))</StaggerChild>
         </StaggerContainer>
       </DescriptionContainer>
+      <BackButton onClick={reverseAnimation}>Go back</BackButton>
     </Container>
   );
 };
@@ -78,11 +89,10 @@ const TextContainer = styled.div`
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  padding: 3rem;
   z-index: 5;
 `;
 const ImageText = styled.p`
-  font-size: 10rem;
+  font-size: 8rem;
   transform: translateY(100%);
   z-index: 5;
   color: white;
@@ -95,9 +105,9 @@ const CardCover = styled.span`
   height: 120%;
   background-color: black;
   z-index: 2;
-  transform: translateY(-20%);
 `;
 
+//stagger animation
 const DescriptionContainer = styled.div`
   color: white;
   display: flex;
@@ -113,4 +123,14 @@ const StaggerContainer = styled.div`
 const StaggerChild = styled.span`
   display: block;
   transform: translateY(200%);
+`;
+
+const BackButton = styled.button`
+  all: unset;
+  color: white;
+
+  margin-top: 2rem;
+  border: 1px solid;
+  padding: 1rem;
+  cursor: pointer;
 `;
