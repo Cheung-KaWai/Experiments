@@ -5,17 +5,17 @@ import styled from "styled-components";
 import { Building } from "./Building";
 import { CurtainRoom } from "./CurtainRoom";
 import { Curtain } from "./Curtain";
+import { Umbroso } from "./Experiment4/Umbroso";
 
 export const Scene = () => {
   return (
     <SceneContainer>
       <Canvas camera={{ position: [0, 4, 4] }}>
         <OrbitControls />
-        {/* <Environment preset="city" /> */}
-        <ambientLight intensity={0.3} />
+        <Environment preset="sunset" background />
+        {/* <ambientLight intensity={0.3} /> */}
         <Center>
-          <CurtainRoom />
-          <Curtain />
+          <Umbroso />
         </Center>
       </Canvas>
     </SceneContainer>
