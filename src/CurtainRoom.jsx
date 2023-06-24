@@ -55,7 +55,7 @@ export function CurtainRoom(props) {
   const roomMat = new MeshStandardMaterial({
     lightMap: roombake,
     envMapIntensity: 0,
-    lightMapIntensity: 1.7,
+    lightMapIntensity: 10,
     aoMap: aoWalls,
     aoMapIntensity: 0.7,
   });
