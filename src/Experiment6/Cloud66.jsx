@@ -28,6 +28,7 @@ export const Cloud66 = () => {
           target={[-1.03, 1.32, 0.03]}
           ref={orbitRef}
           onChange={() => console.log(orbitRef.current)}
+          enablePan={false}
         />
         {/* <BakedCloud66 />
           <BakeCloud66Emission /> */}
