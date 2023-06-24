@@ -8,15 +8,15 @@ export const Router = () => {
   const router = createBrowserRouter([
     {
       path: "/",
+      element: <Cloud66 />,
+    },
+    {
+      path: "/main",
       element: <Mainpage />,
     },
     {
       path: "/detail",
       element: <DetailPage />,
-    },
-    {
-      path: "/cloud66",
-      element: <Cloud66 />,
     },
   ]);
   return <RouterProvider router={router} />;
